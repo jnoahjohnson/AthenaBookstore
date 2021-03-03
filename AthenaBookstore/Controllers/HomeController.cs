@@ -24,19 +24,23 @@ namespace AthenaBookstore.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string category, int page = 1)
         {
             // Pass in the repository books
             // Also, change this in the future back into the index, for the sake of the continued project I didn't want to change too much and then have to change it back
             // There is also now pagination to get the number of items per each page
+            // Additinoally, there is the num items based on the category that is fiiltered
             return View("ViewBooks", new BookListViewModel
             {
-                Books = _repository.Books.OrderBy(p => p.BookId).Skip((page - 1) * PageSize).Take(PageSize),
+                Books = _repository.Books.Where(p => category == null || p.Category == category).OrderBy(p => p.BookId).Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalNumItems = _repository.Books.Count()
+                    TotalNumItems = category == null ?
+                        _repository.Books.Count() :
+                        _repository.Books.Where(e =>
+                            e.Category == category).Count()
                 }
             });
         }

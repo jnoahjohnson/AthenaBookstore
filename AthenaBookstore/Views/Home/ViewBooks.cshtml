@@ -9,77 +9,11 @@
         
 *@
 
-<div class="py-4 px-3 bg-primary text-white rounded mt-2 border-bottom border-info shadow mb-3">
-    <h1>Welcome to Athena Bookstore</h1>
-    <h2 class="font-weight-light">Checkout our selection of books</h2>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Title
-            </th>
-            @*I thought it looked cleaner to put the whole author name in here, not seperate it out, though it is on the database*@
-            <th>
-                Author
-            </th>
-            <th>
-                Publisher
-            </th>
-            <th>
-                ISBN
-            </th>
-            <th>
-                Classification
-            </th>
-            <th>
-                Category
-            </th>
-            <th>
-                Pages
-            </th>
-            <th>
-                Price
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+@*This has been refactored to now display cards*@
 @foreach (var item in Model.Books) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @*
-            Wanted to try out how to combine all of these, especially since the middle name might not exist.
-            This part will concatenate all of the strings, the middle name will either return a space or the name of the author
-            surrounded by spaces
-                *@
-                @(item.AuthorFirstName + (item.AuthorMiddleName == "" ? " " : $" {item.AuthorMiddleName} ") + item.AuthorLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Publisher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Classification)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumPages)
-            </td>
-            <td>
-                @($"${item.Price}")
-            </td>
-        </tr>
+    @*Partial view*@
+    <partial name="BookSummary" model="item" />
+        
 }
-    </tbody>
-</table>
 
-<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-info" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-info" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory" class="btn-group pull-right m-1"></div>
