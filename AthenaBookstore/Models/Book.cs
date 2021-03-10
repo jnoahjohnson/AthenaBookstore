@@ -32,7 +32,6 @@ namespace AthenaBookstore.Models
         [Required]
         public int NumPages { get; set; }
 
-
     }
 }
 

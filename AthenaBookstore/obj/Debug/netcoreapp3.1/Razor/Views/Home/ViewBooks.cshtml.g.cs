@@ -33,8 +33,15 @@ using AthenaBookstore.Models.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\noahjohnson\source\repos\AthenaBookstore\AthenaBookstore\Views\_ViewImports.cshtml"
+using AthenaBookstore.Infrastructure;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5dd4d70b84e1d650f613376c7cb0c59b488daf5f", @"/Views/Home/ViewBooks.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7990a560327b2a89edf150c5a09747c29770ed89", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ba0a19cf5d449b5e66289a09ac892f125c040fd6", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_ViewBooks : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<BookListViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "BookSummary", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -88,7 +95,7 @@ using AthenaBookstore.Models.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral("    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5dd4d70b84e1d650f613376c7cb0c59b488daf5f5915", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5dd4d70b84e1d650f613376c7cb0c59b488daf5f6126", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -120,7 +127,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = item;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5dd4d70b84e1d650f613376c7cb0c59b488daf5f7718", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5dd4d70b84e1d650f613376c7cb0c59b488daf5f7929", async() => {
             }
             );
             __AthenaBookstore_Infrastructure_PageLinkTagHelper = CreateTagHelper<global::AthenaBookstore.Infrastructure.PageLinkTagHelper>();

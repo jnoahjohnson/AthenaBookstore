@@ -1,6 +1,7 @@
 using AthenaBookstore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,12 +31,23 @@ namespace AthenaBookstore
             // Additional service to setup the sql server configuration
             services.AddDbContext<BookstoreDbContext>(options =>
            {
-               options.UseSqlServer(Configuration["ConnectionStrings:BookstoreConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:BookstoreConnection"]);
            });
 
             // Adding a scoped service (repositiory)
             // Looks like we will visit this later
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            // Enable Razor Pages
+            services.AddRazorPages();
+
+            // Setting up sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            // Add cart service
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 
@@ -54,6 +66,7 @@ namespace AthenaBookstore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
@@ -62,21 +75,24 @@ namespace AthenaBookstore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("catpage", 
-                    "{category}/P{page:int}",
+                    "{category}/P{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
-                endpoints.MapControllerRoute("page", "P{page:int}",
-                    new { Controller = "Home", action = "Index", page = 1 });
+                endpoints.MapControllerRoute("page", "P{pageNum:int}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 endpoints.MapControllerRoute("category", "{category}",
-                    new { Controller = "Home", action = "Index", page = 1 });
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 endpoints.MapControllerRoute(
                     "pagination",
-                    "P{page}",
+                    "P{pageNum}",
                     new {Controller = "Home", action = "Index"});
 
                 endpoints.MapDefaultControllerRoute();
+
+                // Register Razor Pages as endpoints
+                endpoints.MapRazorPages();
             });
 
             SeedData.EnsurePopulated(app);

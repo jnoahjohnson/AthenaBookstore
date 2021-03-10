@@ -51,7 +51,7 @@ namespace AthenaBookstore.Infrastructure
                 TagBuilder tag = new TagBuilder("a");
 
                 // URL generation
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
                 if (PageClassesEnabled)
                 {
